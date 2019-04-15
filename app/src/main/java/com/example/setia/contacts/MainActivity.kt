@@ -8,13 +8,13 @@ import androidx.navigation.ui.NavigationUI
 import com.example.setia.contacts.contactlist.ContactListFragment
 import com.example.setia.contacts.contactlist.ContactListFragmentDirections
 import com.example.setia.contacts.contactlist.dummy.DummyContent
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ContactListFragment.OnListFragmentInteractionListener {
 
     private val navController by lazy {
         Navigation.findNavController(this, R.id.mainNavigationFragment)
     }
+
     override fun onSupportNavigateUp() =
         findNavController(R.id.mainNavigationFragment).navigateUp()
 
@@ -31,6 +31,5 @@ class MainActivity : AppCompatActivity(), ContactListFragment.OnListFragmentInte
 
     private fun setupNavigation() {
         NavigationUI.setupActionBarWithNavController(this, navController)
-        NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }
 }
