@@ -2,6 +2,7 @@ package com.example.setia.contacts.contactlist
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -9,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.setia.contacts.R
-import com.example.setia.contacts.base.BaseFragment
 
 import com.example.setia.contacts.contactlist.dummy.DummyContent
 import com.example.setia.contacts.contactlist.dummy.DummyContent.DummyItem
@@ -19,7 +19,7 @@ import com.example.setia.contacts.contactlist.dummy.DummyContent.DummyItem
  * Activities containing this fragment MUST implement the
  * [ContactListFragment.OnListFragmentInteractionListener] interface.
  */
-class ContactListFragment : BaseFragment() {
+class ContactListFragment : Fragment() {
 
     // TODO: Customize parameters
     private var columnCount = 1
