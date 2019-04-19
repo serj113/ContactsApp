@@ -4,16 +4,15 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.example.setia.contacts.R
 
 import com.example.setia.contacts.contactlist.dummy.DummyContent
 import com.example.setia.contacts.contactlist.dummy.DummyContent.DummyItem
 import kotlinx.android.synthetic.main.fragment_contact_list.*
-import kotlinx.android.synthetic.main.fragment_contact_list.view.*
 
 /**
  * A fragment representing a list of Items.
@@ -50,6 +49,10 @@ class ContactListFragment : Fragment() {
 
         list.layoutManager = LinearLayoutManager(context)
         list.adapter = MyContactListRecyclerViewAdapter(DummyContent.ITEMS, listener)
+
+        fab_create_contact.setOnClickListener {
+            Navigation.findNavController(view).navigate(ContactListFragmentDirections.openCrateContactFragment())
+        }
     }
 
     override fun onAttach(context: Context) {
