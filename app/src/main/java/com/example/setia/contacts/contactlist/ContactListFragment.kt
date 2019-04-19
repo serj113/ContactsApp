@@ -13,6 +13,7 @@ import com.example.setia.contacts.R
 
 import com.example.setia.contacts.contactlist.dummy.DummyContent
 import com.example.setia.contacts.contactlist.dummy.DummyContent.DummyItem
+import kotlinx.android.synthetic.main.fragment_contact_list.*
 
 /**
  * A fragment representing a list of Items.
@@ -40,17 +41,10 @@ class ContactListFragment : Fragment() {
     ): View? {
         activity?.title = "Tada"
         val view = inflater.inflate(R.layout.fragment_contact_list, container, false)
+        list = (Reyc)view.findViewById(R.id.list)
+        list.layoutManager = LinearLayoutManager(context)
+        list.adapter = MyContactListRecyclerViewAdapter(DummyContent.ITEMS, listener)
 
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = MyContactListRecyclerViewAdapter(DummyContent.ITEMS, listener)
-            }
-        }
         return view
     }
 
