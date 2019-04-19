@@ -3,7 +3,6 @@ package com.example.setia.contacts.contactlist
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -14,6 +13,7 @@ import com.example.setia.contacts.R
 import com.example.setia.contacts.contactlist.dummy.DummyContent
 import com.example.setia.contacts.contactlist.dummy.DummyContent.DummyItem
 import kotlinx.android.synthetic.main.fragment_contact_list.*
+import kotlinx.android.synthetic.main.fragment_contact_list.view.*
 
 /**
  * A fragment representing a list of Items.
@@ -41,11 +41,15 @@ class ContactListFragment : Fragment() {
     ): View? {
         activity?.title = "Tada"
         val view = inflater.inflate(R.layout.fragment_contact_list, container, false)
-        list = (Reyc)view.findViewById(R.id.list)
-        list.layoutManager = LinearLayoutManager(context)
-        list.adapter = MyContactListRecyclerViewAdapter(DummyContent.ITEMS, listener)
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        list.layoutManager = LinearLayoutManager(context)
+        list.adapter = MyContactListRecyclerViewAdapter(DummyContent.ITEMS, listener)
     }
 
     override fun onAttach(context: Context) {
