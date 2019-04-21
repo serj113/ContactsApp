@@ -10,26 +10,20 @@ import com.example.setia.contacts.R
 
 import com.example.setia.contacts.contactlist.ContactListFragment.OnListFragmentInteractionListener
 import com.example.setia.contacts.contactlist.dummy.DummyContent.DummyItem
+import com.example.setia.contacts.model.Contact
 
 import kotlinx.android.synthetic.main.fragment_contact_list_item.view.*
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
 class MyContactListRecyclerViewAdapter(
-    private val mValues: List<DummyItem>,
     private val mListener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<MyContactListRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
+    private var mValues: List<Contact> = listOf()
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyItem
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
+            val item = v.tag as Contact
             mListener?.onListFragmentInteraction(item)
         }
     }
@@ -42,8 +36,7 @@ class MyContactListRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
+        holder.bind(item)
 
         with(holder.mView) {
             tag = item
@@ -53,12 +46,17 @@ class MyContactListRecyclerViewAdapter(
 
     override fun getItemCount(): Int = mValues.size
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+    fun updateData(contactList: List<Contact>) {
+        mValues = contactList
+        notifyDataSetChanged()
+    }
 
-        override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
+    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+        private val viewModel = ContactViewModel()
+
+        fun bind(contact: Contact) {
+            viewModel.bind(contact)
         }
+
     }
 }

@@ -1,6 +1,6 @@
 package com.example.setia.contacts.base
 
-import com.example.setia.contacts.contactdetail.ContactDetailAction
+import com.example.setia.contacts.base.implementation.ActionVM
 import com.example.setia.contacts.injection.ActionInjector
 import com.example.setia.contacts.injection.DaggerActionInjector
 import com.example.setia.contacts.injection.module.NetworkModule
@@ -18,7 +18,7 @@ abstract class BaseAction {
 
     private fun inject() {
         when (this) {
-            is ContactDetailAction -> injector.inject(this)
+            is ActionVM -> injector.inject(this)
         }
     }
 }

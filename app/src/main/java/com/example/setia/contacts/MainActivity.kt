@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.setia.contacts.contactlist.ContactListFragment
 import com.example.setia.contacts.contactlist.ContactListFragmentDirections
-import com.example.setia.contacts.contactlist.dummy.DummyContent
+import com.example.setia.contacts.model.Contact
 
 class MainActivity : AppCompatActivity(), ContactListFragment.OnListFragmentInteractionListener {
 
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(), ContactListFragment.OnListFragmentInte
     override fun onSupportNavigateUp() =
         findNavController(R.id.mainNavigationFragment).navigateUp()
 
-    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+    override fun onListFragmentInteraction(item: Contact?) {
         val action = ContactListFragmentDirections.openContactDetailFragment()
         navController.navigate(action)
     }

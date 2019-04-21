@@ -1,37 +1,25 @@
 package com.example.setia.contacts.contactlist
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.example.setia.contacts.R
+import com.example.setia.contacts.base.BaseFragment
 
-import com.example.setia.contacts.contactlist.dummy.DummyContent
-import com.example.setia.contacts.contactlist.dummy.DummyContent.DummyItem
+import com.example.setia.contacts.model.Contact
 import kotlinx.android.synthetic.main.fragment_contact_list.*
 
-/**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [ContactListFragment.OnListFragmentInteractionListener] interface.
- */
-class ContactListFragment : Fragment() {
-
-    // TODO: Customize parameters
-    private var columnCount = 1
+class ContactListFragment : BaseFragment() {
 
     private var listener: OnListFragmentInteractionListener? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
+    private val viewModel: ContactListViewModel by lazy {
+        ViewModelProviders.of(this).get(ContactListViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -39,16 +27,22 @@ class ContactListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         activity?.title = "Tada"
-        val view = inflater.inflate(R.layout.fragment_contact_list, container, false)
-
-        return view
+        return inflater.inflate(R.layout.fragment_contact_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         list.layoutManager = LinearLayoutManager(context)
-        list.adapter = MyContactListRecyclerViewAdapter(DummyContent.ITEMS, listener)
+        val adapter = MyContactListRecyclerViewAdapter(listener)
+        viewModel.getContactList().observe(this, Observer {
+            it?.let {contactList ->
+                adapter.updateData(contactList)
+            }
+        })
+
+        list.adapter = adapter
+        viewModel.loadData()
 
         fab_create_contact.setOnClickListener {
             Navigation.findNavController(view).navigate(ContactListFragmentDirections.openCrateContactFragment())
@@ -69,25 +63,7 @@ class ContactListFragment : Fragment() {
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson
-     * [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
-    }
-
-    companion object {
-
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
+        fun onListFragmentInteraction(item: Contact?)
     }
 }
