@@ -10,6 +10,11 @@ androidExtensions {
 
 android {
     compileSdkVersion 28
+
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.example.setia.contacts"
         minSdkVersion 19

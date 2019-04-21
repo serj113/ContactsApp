@@ -8,6 +8,6 @@ interface ContactsApi {
     /**
      * Get the list of the contacts from the API
      */
-    @GET("/posts")
+    @GET("contacts")
     fun getPosts(): Observable<Response>
 }

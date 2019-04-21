@@ -1,5 +1,6 @@
 package com.example.setia.contacts.contactlist
 
+import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.example.setia.contacts.R
 
 import com.example.setia.contacts.contactlist.ContactListFragment.OnListFragmentInteractionListener
 import com.example.setia.contacts.contactlist.dummy.DummyContent.DummyItem
+import com.example.setia.contacts.databinding.FragmentContactListItemBinding
 import com.example.setia.contacts.model.Contact
 
 import kotlinx.android.synthetic.main.fragment_contact_list_item.view.*
@@ -29,19 +31,17 @@ class MyContactListRecyclerViewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_contact_list_item, parent, false)
-        return ViewHolder(view)
+        val binding: FragmentContactListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.fragment_contact_list_item, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
         holder.bind(item)
 
-        with(holder.mView) {
-            tag = item
-            setOnClickListener(mOnClickListener)
-        }
+//        with(holder.mView) {
+//            setOnClickListener(mOnClickListener)
+//        }
     }
 
     override fun getItemCount(): Int = mValues.size
@@ -51,11 +51,12 @@ class MyContactListRecyclerViewAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+    inner class ViewHolder(private val binding: FragmentContactListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         private val viewModel = ContactViewModel()
 
         fun bind(contact: Contact) {
             viewModel.bind(contact)
+            binding.viewModel = viewModel
         }
 
     }
