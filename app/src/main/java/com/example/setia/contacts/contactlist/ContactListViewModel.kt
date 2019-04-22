@@ -27,7 +27,7 @@ class ContactListViewModel: BaseVM<ContactListAction>() {
             .subscribe(
                 {
                     contactList.value = it.Data
-                    Log.d("tada", it.Message)
+                    Log.d("tada", "${getContactList().value?.size ?: 0}")
                 },
                 {
                     contactList.value = listOf()

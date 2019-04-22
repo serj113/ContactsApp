@@ -2,6 +2,7 @@ package com.example.setia.contacts.contactlist
 
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,7 @@ class MyContactListRecyclerViewAdapter(
 
     fun updateData(contactList: List<Contact>) {
         mValues = contactList
+        Log.d("tada", "asik ${contactList.size}")
         notifyDataSetChanged()
     }
 
