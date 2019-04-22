@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
+import com.example.setia.contacts.util.extentions.getParentActivity
 
 @BindingAdapter("adapter")
 fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {

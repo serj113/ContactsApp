@@ -26,7 +26,7 @@ class MyContactListRecyclerViewAdapter(
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as Contact
+            val item: Contact? = v.tag as? Contact
             mListener?.onListFragmentInteraction(item)
         }
     }
@@ -39,10 +39,7 @@ class MyContactListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
         holder.bind(item)
-
-//        with(holder.mView) {
-//            setOnClickListener(mOnClickListener)
-//        }
+        holder.itemView.setOnClickListener(mOnClickListener)
     }
 
     override fun getItemCount(): Int = mValues.size

@@ -1,4 +1,4 @@
-package com.example.setia.contacts.util
+package com.example.setia.contacts.util.extentions
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

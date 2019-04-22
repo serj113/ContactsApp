@@ -1,4 +1,4 @@
-package com.example.setia.contacts.util
+package com.example.setia.contacts.util.extentions
 
 import android.content.ContextWrapper
 import android.support.v7.app.AppCompatActivity
