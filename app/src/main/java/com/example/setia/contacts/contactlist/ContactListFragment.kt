@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +15,12 @@ import com.example.setia.contacts.base.BaseFragment
 import com.example.setia.contacts.model.Contact
 import kotlinx.android.synthetic.main.fragment_contact_list.*
 
-class ContactListFragment : BaseFragment() {
+class ContactListFragment : BaseFragment<ContactListViewModel>() {
 
     private var listener: OnListFragmentInteractionListener? = null
-    private val viewModel: ContactListViewModel by lazy {
-        ViewModelProviders.of(this).get(ContactListViewModel::class.java)
+
+    override fun initVM() {
+        vm = ViewModelProviders.of(this).get(ContactListViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -36,14 +36,12 @@ class ContactListFragment : BaseFragment() {
 
         list.layoutManager = LinearLayoutManager(context)
         val adapter = MyContactListRecyclerViewAdapter(listener)
-        viewModel.getContactList().observe(this, Observer {
-            it?.let {contactList ->
-                adapter.updateData(contactList)
-            }
+        vm?.getContactList()?.observe(this, Observer {
+            it?.let(adapter::updateData)
         })
 
         list.adapter = adapter
-        viewModel.loadData()
+        vm?.loadData()
 
         fab_create_contact.setOnClickListener {
             Navigation.findNavController(view).navigate(ContactListFragmentDirections.openCrateContactFragment())
@@ -55,7 +53,7 @@ class ContactListFragment : BaseFragment() {
         if (context is OnListFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnListFragmentInteractionListener")
         }
     }
 

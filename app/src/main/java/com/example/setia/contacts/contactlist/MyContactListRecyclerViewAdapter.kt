@@ -6,16 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.example.setia.contacts.R
-
-
 import com.example.setia.contacts.contactlist.ContactListFragment.OnListFragmentInteractionListener
-import com.example.setia.contacts.contactlist.dummy.DummyContent.DummyItem
 import com.example.setia.contacts.databinding.FragmentContactListItemBinding
 import com.example.setia.contacts.model.Contact
 
-import kotlinx.android.synthetic.main.fragment_contact_list_item.view.*
 
 class MyContactListRecyclerViewAdapter(
     private val mListener: OnListFragmentInteractionListener?

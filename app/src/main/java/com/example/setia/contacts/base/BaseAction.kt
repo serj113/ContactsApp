@@ -1,24 +1,14 @@
 package com.example.setia.contacts.base
 
-import com.example.setia.contacts.base.implementation.ActionVM
-import com.example.setia.contacts.injection.ActionInjector
-import com.example.setia.contacts.injection.DaggerActionInjector
-import com.example.setia.contacts.injection.module.NetworkModule
+import com.example.setia.contacts.network.ContactsApi
+import com.example.setia.contacts.room.ContactDao
+import javax.inject.Inject
 
 abstract class BaseAction {
 
-    private val injector: ActionInjector = DaggerActionInjector
-        .builder()
-        .networkModule(NetworkModule)
-        .build()
+    @Inject
+    lateinit var API: ContactsApi
 
-    init {
-        inject()
-    }
-
-    private fun inject() {
-        when (this) {
-            is ActionVM -> injector.inject(this)
-        }
-    }
+    @Inject
+    lateinit var contactDao: ContactDao
 }

@@ -1,7 +1,7 @@
 package com.example.setia.contacts.contactdetail
 
-import com.example.setia.contacts.base.implementation.ActionVM
+import com.example.setia.contacts.base.BaseAction
 
-class ContactDetailAction: ActionVM() {
+class ContactDetailAction: BaseAction() {
 
 }

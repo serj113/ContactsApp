@@ -1,7 +1,16 @@
 package com.example.setia.contacts.base
 
+import android.os.Bundle
 import android.support.v4.app.Fragment
 
-open class BaseFragment: Fragment() {
+abstract class BaseFragment<V>: Fragment() {
 
+    var vm: V? = null
+
+    abstract fun initVM()
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initVM()
+    }
 }

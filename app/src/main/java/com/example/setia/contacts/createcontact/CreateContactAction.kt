@@ -1,7 +1,7 @@
 package com.example.setia.contacts.createcontact
 
-import com.example.setia.contacts.base.implementation.ActionVM
+import com.example.setia.contacts.base.BaseAction
 
-class CreateContactAction: ActionVM() {
+class CreateContactAction: BaseAction() {
 
 }

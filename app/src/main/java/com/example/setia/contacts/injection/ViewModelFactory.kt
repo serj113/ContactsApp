@@ -9,7 +9,7 @@ class ViewModelFactory(private val activity: AppCompatActivity): ViewModelProvid
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ContactDetailViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return ContactDetailViewModel() as T
+            return ContactDetailViewModel(activity.application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
 

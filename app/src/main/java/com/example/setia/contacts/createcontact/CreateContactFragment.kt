@@ -10,13 +10,17 @@ import android.view.ViewGroup
 import com.example.setia.contacts.R
 import com.example.setia.contacts.base.BaseFragment
 
-class CreateContactFragment : BaseFragment() {
+class CreateContactFragment : BaseFragment<CreateContactViewModel>() {
 
     companion object {
         fun newInstance() = CreateContactFragment()
     }
 
     private lateinit var viewModel: CreateContactViewModel
+
+    override fun initVM() {
+        vm = ViewModelProviders.of(this).get(CreateContactViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

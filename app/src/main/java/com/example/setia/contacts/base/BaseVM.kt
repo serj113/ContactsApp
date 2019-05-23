@@ -1,6 +1,16 @@
 package com.example.setia.contacts.base
 
-import android.arch.lifecycle.ViewModel
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 
-open class BaseVM<T : BaseAction>: ViewModel() {
+abstract class BaseVM<A: BaseAction>(app: Application): AndroidViewModel(app) {
+
+    var actions: A? = null
+
+    abstract fun initActions()
+
+    init {
+        initActions()
+    }
+
 }
