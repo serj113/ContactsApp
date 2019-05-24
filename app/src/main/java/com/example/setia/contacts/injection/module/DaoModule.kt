@@ -1,17 +1,12 @@
 package com.example.setia.contacts.injection.module
 
-import android.app.Application
 import android.arch.persistence.room.Room
-import android.content.Context
 import com.example.setia.contacts.App
 import com.example.setia.contacts.room.AppDatabase
 import com.example.setia.contacts.room.ContactDao
-import com.example.setia.contacts.util.AppContext
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Module
 @Suppress("unused")

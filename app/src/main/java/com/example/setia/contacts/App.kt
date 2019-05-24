@@ -15,7 +15,6 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         appInjector = initDagger(this)
-        Log.d("tada", "init app")
     }
 
     private fun initDagger(app: App): AppInjector =

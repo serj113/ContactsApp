@@ -9,8 +9,9 @@ abstract class BaseFragment<V>: Fragment() {
 
     abstract fun initVM()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initVM()
     }
+
 }
