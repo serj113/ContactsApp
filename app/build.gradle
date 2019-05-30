@@ -65,9 +65,14 @@ dependencies {
     implementation "android.arch.persistence.room:rxjava2:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
 
+    // Navigation
     implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha01'
     implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha01'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    // Test
+    testImplementation "junit:junit:$junit"
+    testImplementation 'androidx.test:core:1.0.0'
+    testImplementation "org.mockito:mockito-core:$mockito"
+    androidTestImplementation "com.android.support.test:runner:$junit_runner"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
 }
