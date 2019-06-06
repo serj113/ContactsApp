@@ -29,14 +29,12 @@ class ContactListViewModel(app: Application): BaseVM<ContactListAction>(app) {
     fun getContactList(): LiveData<List<Contact>> = contactList
 
     fun loadData() {
-        Log.d("tada", "load data")
         val disposable: Disposable? = actions?.getContactObservable()
             ?.subscribeOn(Schedulers.io())
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe(
                 {
                     contactList.value = it.Data
-                    Log.d("tada", "${getContactList().value?.size ?: 0}")
                 },
                 {
                     contactList.value = listOf()
@@ -45,7 +43,6 @@ class ContactListViewModel(app: Application): BaseVM<ContactListAction>(app) {
             )
 
         if (disposable != null) disposes.add(disposable)
-        Log.d("tada", "load data end")
     }
 
     override fun onCleared() {

@@ -1,29 +1,31 @@
 package com.example.setia.contacts
 
+import android.app.Application
+import com.example.setia.contacts.contactlist.ContactListViewModel
 import com.example.setia.contacts.model.Contact
 import com.example.setia.contacts.model.Response
-import com.example.setia.contacts.network.ContactsApi
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
-import io.reactivex.observers.TestObserver
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
-import org.junit.Assert.assertEquals
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
+class ContactListViewModelUT {
 
-class ContactsApiUT {
+    lateinit var contactListViewModel: ContactListViewModel
 
     @Mock
-    lateinit var contactsApi: ContactsApi
+    lateinit var mockApplication: Application
 
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
+        contactListViewModel = ContactListViewModel(mockApplication)
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
         RxJavaPlugins.setComputationSchedulerHandler { Schedulers.trampoline() }
         RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
@@ -31,8 +33,8 @@ class ContactsApiUT {
     }
 
     @Test
-    fun getContact() {
-        val reponse = Response(
+    fun loadData() {
+        val response = Response(
             200,
             "Success",
             listOf(
@@ -44,18 +46,11 @@ class ContactsApiUT {
                 )
             )
         )
-        `when`(contactsApi.getPosts())
-            .thenReturn(Observable.just(reponse))
+        Mockito.`when`(contactListViewModel.actions?.getContactObservable())
+            .thenReturn(Observable.just(response))
 
-        val testObserver = TestObserver<Response>()
-        contactsApi.getPosts().subscribe(testObserver)
-        testObserver.assertComplete()
-        testObserver.assertNoErrors()
-        testObserver.assertValueCount(1)
+        val result = contactListViewModel.getContactList().value?.first()
 
-        val result = testObserver.values().first()
-
-        assertEquals(result.Status, 200)
+        Assert.assertEquals(result?.id, "1")
     }
-
 }
