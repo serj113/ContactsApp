@@ -34,7 +34,7 @@ class ContactListViewModel(app: Application): BaseVM<ContactListAction>(app) {
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe(
                 {
-                    contactList.value = it.Data
+                    contactList.value = it.data
                 },
                 {
                     contactList.value = listOf()

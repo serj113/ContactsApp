@@ -55,7 +55,7 @@ class ContactsApiUT {
 
         val result = testObserver.values().first()
 
-        assertEquals(result.Status, 200)
+        assertEquals(result.status, 200)
     }
 
 }
